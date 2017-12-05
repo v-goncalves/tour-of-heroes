@@ -1,5 +1,8 @@
 // tourOfHeroesApp - application main module.
 
+import * as angularJsModel from '../../node_modules/@types/angular/index';
+declare var angular: angularJsModel.IAngularStatic;
+
 import { AppRootComponent } from './app-root.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
