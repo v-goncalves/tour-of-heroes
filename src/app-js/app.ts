@@ -10,35 +10,43 @@ import { HeroesComponent } from './heroes/heroes.component';
 import { ApiServiceFactory } from './core/virtual-api-service';
 import { HeroServiceFactory } from './core/hero-service';
 
-
-angular
-  .module('tourOfHeroesApp', [
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch'
-  ])
-  .config(function ($routeProvider, $locationProvider) {
-    $locationProvider.hashPrefix('');
-    $locationProvider.html5Mode({
-      enabled: true
+function configRouting ($routeProvider, $locationProvider) {
+  $locationProvider.hashPrefix('');
+  $locationProvider.html5Mode({
+    enabled: true
+  });
+  $routeProvider
+    .when('/', {
+      template: '<dashboard></dashboard>'
+    })
+    .when('/heroes/:heroId?', {
+      template: '<heroes></heroes>'
+    })
+    .otherwise({
+      redirectTo: '/'
     });
-    $routeProvider
-      .when('/', {
-        template: '<dashboard></dashboard>'
-      })
-      .when('/heroes/:heroId?', {
-        template: '<heroes></heroes>'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  })
-  .component('appRoot', AppRootComponent)
-  .component('mainMenu', MainMenuComponent)
-  .component('dashboard', DashboardComponent)
-  .component('heroes', HeroesComponent)
-  .factory('apiService', ApiServiceFactory)
-  .factory('heroService', HeroServiceFactory);
+}
+configRouting.$inject = ['$routeProvider', '$locationProvider'];
 
-angular.bootstrap(document.documentElement, ['tourOfHeroesApp']);
+export const ANGULAR_JS_MAIN_MODULE_NAME = 'tourOfHeroesApp';
+export class AngularJsApp {
+  constructor() { }
+  bootstrap() {
+    angular
+      .module(ANGULAR_JS_MAIN_MODULE_NAME, [
+        'ngResource',
+        'ngRoute',
+        'ngSanitize',
+        'ngTouch'
+      ])
+      .config(configRouting)
+      .component('appRoot', AppRootComponent)
+      .component('mainMenu', MainMenuComponent)
+      .component('dashboard', DashboardComponent)
+      .component('heroes', HeroesComponent)
+      .factory('apiService', ApiServiceFactory)
+      .factory('heroService', HeroServiceFactory);
+
+    // angular.bootstrap(document.documentElement, ['tourOfHeroesApp']);
+  }
+}
