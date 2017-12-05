@@ -1,0 +1,10 @@
+bower_components/angular-touch/angular-touch.min.js
+bower_components/
+node_modules/
+.idea/
+*.lock
+.tmp/
+dist/
+.systemjs/
+*.log
+.tscache/

@@ -1,0 +1,26 @@
+{
+  "name": "tour-of-heroes",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "^1.6.6",
+    "bootstrap": "^3.2.0",
+    "angular-resource": "^1.6.6",
+    "angular-route": "^1.6.6",
+    "angular-sanitize": "^1.6.6",
+    "angular-touch": "^1.6.6"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.6.6"
+  },
+  "appPath": "app",
+  "moduleName": "tourOfHeroesApp",
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  }
+}

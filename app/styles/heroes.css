@@ -1,0 +1,66 @@
+.heroes .all-heroes ul {
+  display: block;
+  max-width: 300px;
+  list-style-type: none;
+  padding-left: 0 !important;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 40px;
+}
+
+.heroes .all-heroes ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+  position: relative;
+  left: 0;
+  background-color: #EEE;
+  margin: .5em;
+  padding: .5em;
+  border-radius: 4px;
+}
+
+.heroes .all-heroes ul li > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.heroes .all-heroes ul li.deleting {
+  background-color: slategrey;
+}
+
+.heroes .all-heroes ul li .badge {
+  display: inline-block;
+  font-size: small;
+  color: white;
+  padding: 6px 10px;
+  background-color: rgb(0, 120, 215);
+  line-height: 1em;
+  position: relative;
+  height: 1.8em;
+  margin-right: .8em;
+  border-radius: 4px 0 0 4px;
+}
+
+.heroes .all-heroes ul li button {
+  background-color: gray !important;
+  background-color: rgb(216, 59, 1) !important;
+  color: white;
+}
+
+.heroes .hero-edit > h1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.heroes .hero-edit form {
+  margin-top: 40px;
+}
+
+.heroes .hero-edit button {
+  margin: 10px 10px 10px 0;
+}
