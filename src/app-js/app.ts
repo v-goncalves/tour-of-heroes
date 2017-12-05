@@ -1,11 +1,11 @@
 // tourOfHeroesApp - application main module.
 
-import { AppRootComponent } from './app-root.component.js';
-import { MainMenuComponent } from './main-menu/main-menu.component.js';
-import { DashboardComponent } from './dashboard/dashboard.component.js';
-import { HeroesComponent } from './heroes/heroes.component.js';
-import { ApiServiceFactory } from './core/virtual-api-service.js';
-import { HeroServiceFactory } from './core/hero-service.js';
+import { AppRootComponent } from './app-root.component';
+import { MainMenuComponent } from './main-menu/main-menu.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HeroesComponent } from './heroes/heroes.component';
+import { ApiServiceFactory } from './core/virtual-api-service';
+import { HeroServiceFactory } from './core/hero-service';
 
 
 angular
