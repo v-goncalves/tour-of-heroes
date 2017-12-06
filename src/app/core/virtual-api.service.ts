@@ -1,4 +1,5 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { LoggerService } from './logger.service';
 
 const getHeroesRequestDelay = 1000;
 const updateHeroRequestDelay = 1500;
@@ -17,7 +18,7 @@ export class ApiService {
   private heroIdCounter: number;
   private listOfHeroes: Hero[];
 
-  constructor(@Inject('$log') private $log) {
+  constructor(private $log: LoggerService) {
     this.$log.debug('[ApiService] - INIT.');
     this.heroIdCounter = 10;
     this.listOfHeroes = [];

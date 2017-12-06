@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 
 import { HeroService} from '../core/hero.service';
+import { LoggerService } from '../core/logger.service';
 
 @Component({
   selector: 'heroes',
@@ -14,7 +15,7 @@ export class HeroesComponent {
   private listOfHeroes;
   private heroIDsWaitForDeletion;
 
-  constructor(@Inject('$log') private $log, @Inject('$location') private $location,
+  constructor(private $log: LoggerService, @Inject('$location') private $location,
               @Inject('$routeParams') private $routeParams,  private heroService: HeroService) {
     $log.debug('[HeroesComponent] - INIT.');
     this.heroes = [];

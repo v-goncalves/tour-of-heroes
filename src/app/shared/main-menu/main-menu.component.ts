@@ -1,6 +1,8 @@
 // main-menu.component.ts (to be identified as renamed...)
 import { Component, Inject, ViewEncapsulation } from '@angular/core';
 
+import { LoggerService } from '../../core/logger.service';
+
 @Component({
   selector: 'main-menu',
   encapsulation: ViewEncapsulation.None,
@@ -8,7 +10,7 @@ import { Component, Inject, ViewEncapsulation } from '@angular/core';
 })
 
 export class MainMenuComponent {
-  constructor(@Inject('$log') private $log, @Inject('$location') private $location) {
+  constructor(private $log: LoggerService, @Inject('$location') private $location) {
     $log.debug('[MenuCtrl] - INIT.');
   }
 

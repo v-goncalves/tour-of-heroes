@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { HeroService } from '../core/hero.service';
 
+import { LoggerService } from '../core/logger.service';
+
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
@@ -12,7 +14,7 @@ export class DashboardComponent {
   topHeroes;
   search: string;
 
-  constructor(@Inject('$log') private $log, @Inject('$location') private $location, private heroService: HeroService) {
+  constructor(private $log: LoggerService, @Inject('$location') private $location, private heroService: HeroService) {
     $log.debug('[DashboardCtrl] - INIT.');
     const topN = 4;
 

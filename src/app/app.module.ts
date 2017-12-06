@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 // services
 import { HeroService } from './core/hero.service';
 import { ApiService } from './core/virtual-api.service';
+import { LoggerService } from './core/logger.service';
 
 // components
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -34,6 +35,7 @@ import { HeroesComponent } from './heroes/heroes.component';
   providers: [
     HeroService,
     ApiService,
+    LoggerService,
     upgradedAjsProviders
   ]
 })

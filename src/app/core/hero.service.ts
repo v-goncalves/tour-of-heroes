@@ -1,10 +1,11 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { ApiService } from './virtual-api.service';
+import { LoggerService } from './logger.service';
 
 @Injectable()
 export class HeroService {
-  constructor(@Inject('$log') private $log, private apiService: ApiService) {
+  constructor(private $log: LoggerService, private apiService: ApiService) {
     this.$log.debug('[HeroService] - INIT.');
   }
 
