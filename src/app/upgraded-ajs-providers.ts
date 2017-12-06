@@ -1,6 +1,3 @@
-// Making AngularJS Dependencies Injectable to Angular
-import { apiServiceProvider } from './core/virtual-api.service';
-
 // $log
 export function $logFactory(i: any) { return i.get('$log'); }
 const $logProvider = { provide: '$log', useFactory: $logFactory, deps: ['$injector'] };
@@ -17,13 +14,15 @@ const $routeProvider = { provide: '$route', useFactory: $routeFactory, deps: ['$
 export function $routeParamsFactory(i: any) { return i.get('$routeParams'); }
 const $routeParamsProvider = { provide: '$routeParams', useFactory: $routeParamsFactory, deps: ['$injector'] };
 
-export const upgradedAjsProviders = [
-  // Upgraded services (from AngularJS)
-  apiServiceProvider,
+// $q
+export function $qFactory(i: any) { return i.get('$q'); }
+const $qProvider = { provide: '$q', useFactory: $qFactory, deps: ['$injector'] };
 
+export const upgradedAjsProviders = [
   // Upgraded AngularJS built-in services
   $logProvider,
   $locationProvider,
   $routeProvider,
-  $routeParamsProvider
+  $routeParamsProvider,
+  $qProvider
 ];
