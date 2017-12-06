@@ -1,3 +1,4 @@
+// main-menu.component.ts (to be identified as renamed...)
 const MenuCtrlDependencies = ['$log', '$location'];
 
 export class MainMenuCtrl {
