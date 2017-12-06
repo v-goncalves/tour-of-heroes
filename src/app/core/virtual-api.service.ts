@@ -6,6 +6,7 @@ const deleteHeroRequestDelay = 2000;
 const listOfHeroNames = ['Mr. Nice', 'Narco', 'Bombasto', 'Celeritas', 'Magneta', 'RubberMan', 'Dynama', 'Dr IQ', 'Magma',
   'Tornado'];
 
+declare var Promise: any;
 interface Hero {
   id: number;
   name: string;
@@ -16,7 +17,7 @@ export class ApiService {
   private heroIdCounter: number;
   private listOfHeroes: Hero[];
 
-  constructor(@Inject('$log') private $log, @Inject('$q') private $q) {
+  constructor(@Inject('$log') private $log) {
     this.$log.debug('[ApiService] - INIT.');
     this.heroIdCounter = 10;
     this.listOfHeroes = [];
@@ -39,69 +40,69 @@ export class ApiService {
 
   getHeroes() {
     this.$log.debug('[ApiService : getHeroes] - Triggered.');
-    const deferred = this.$q.defer();
-    setTimeout(() => {
-      deferred.resolve(JSON.parse(JSON.stringify(this.listOfHeroes)));
-    }, getHeroesRequestDelay);
-    return deferred.promise;
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(JSON.parse(JSON.stringify(this.listOfHeroes)));
+      }, getHeroesRequestDelay);
+    });
   }
 
   updateHero(heroToUpdate: Hero) {
     this.$log.debug('[ApiService : updateHero] - Triggered.');
-    const deferred = this.$q.defer();
-    setTimeout(() => {
-      if (heroToUpdate && heroToUpdate.id && !isNaN(heroToUpdate.id)) {
-        const index = this.getIndexOfHeroesListFromHeroId(heroToUpdate.id);
-        if (index < 0) {
-          this.$log.error('[ApiService : updateHero] - Error: the hero you are trying to update do not existe in \'listOfHeroes\'.');
-          deferred.reject({error: 'the hero you are trying to update do not existe in \'listOfHeroes\''});
-          return deferred.promise;
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (heroToUpdate && heroToUpdate.id && !isNaN(heroToUpdate.id)) {
+          const index = this.getIndexOfHeroesListFromHeroId(heroToUpdate.id);
+          if (index < 0) {
+            this.$log.error('[ApiService : updateHero] - Error: the hero you are trying to update do not existe in \'listOfHeroes\'.');
+            reject({error: 'the hero you are trying to update do not existe in \'listOfHeroes\''});
+            return;
+          }
+          this.listOfHeroes[index] = heroToUpdate;
+          resolve(this.listOfHeroes[index]);
         }
-        this.listOfHeroes[index] = heroToUpdate;
-        deferred.resolve(this.listOfHeroes[index]);
-      }
-      else {
-        this.$log.error('[ApiService : updateHero] - Error: invalid hero.id!');
-        deferred.reject({error: 'invalid hero.id'});
-      }
-    }, updateHeroRequestDelay);
-    return deferred.promise;
+        else {
+          this.$log.error('[ApiService : updateHero] - Error: invalid hero.id!');
+          reject({error: 'invalid hero.id'});
+        }
+      }, updateHeroRequestDelay);
+    });
   }
 
   deleteHero(heroToDelete: Hero) {
     this.$log.debug('[ApiService : deleteHero] - Triggered.');
-    const deferred = this.$q.defer();
-    setTimeout(() => {
-      if (heroToDelete && heroToDelete.id && Number.isInteger(heroToDelete.id)) {
-        const index = this.getIndexOfHeroesListFromHeroId(heroToDelete.id);
-        if (index < 0) {
-          this.$log.error('[ApiService : deleteHero] - Error: the hero you are trying to remove do not existe in \'listOfHeroes\'.');
-          deferred.reject({error: 'the hero you are trying to remove do not existe in \'listOfHeroes\''});
-          return deferred.promise;
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (heroToDelete && heroToDelete.id && Number.isInteger(heroToDelete.id)) {
+          const index = this.getIndexOfHeroesListFromHeroId(heroToDelete.id);
+          if (index < 0) {
+            this.$log.error('[ApiService : deleteHero] - Error: the hero you are trying to remove do not existe in \'listOfHeroes\'.');
+            reject({error: 'the hero you are trying to remove do not existe in \'listOfHeroes\''});
+            return;
+          }
+          this.listOfHeroes.splice(index, 1);
+          resolve();
         }
-        this.listOfHeroes.splice(index, 1);
-        deferred.resolve();
-      }
-      else {
-        this.$log.error('[ApiService : deleteHero] - Error: invalid hero.id!');
-        deferred.reject({error: 'invalid hero.id'});
-      }
-    }, deleteHeroRequestDelay);
-    return deferred.promise;
+        else {
+          this.$log.error('[ApiService : deleteHero] - Error: invalid hero.id!');
+          reject({error: 'invalid hero.id'});
+        }
+      }, deleteHeroRequestDelay);
+    });
   }
   // addHero(hero) {
   //   this.$log.debug('[ApiService : addHero] - Triggered.');
-  //   const deferred = this.$q.defer();
-  //   setTimeout(() => {
-  //     if (hero && hero.name) {
-  //       this.listOfHeroes.push({id: this.heroIdCounter++, name: hero.name});
-  //       deferred.resolve();
-  //     }
-  //     else {
-  //       this.$log.error('[ApiService : addHero] - Error: invalid hero!');
-  //       deferred.reject({error: 'invalid hero'});
-  //     }
-  //   }, getHeroesRequestDelay);
-  //   return deferred.promise;
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       if (hero && hero.name) {
+  //         this.listOfHeroes.push({id: this.heroIdCounter++, name: hero.name});
+  //         resolve();
+  //       }
+  //       else {
+  //         this.$log.error('[ApiService : addHero] - Error: invalid hero!');
+  //         reject({error: 'invalid hero'});
+  //       }
+  //     }, getHeroesRequestDelay);
+  //   });
   // }
 }

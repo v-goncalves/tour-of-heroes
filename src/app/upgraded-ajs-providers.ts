@@ -14,15 +14,10 @@ const $routeProvider = { provide: '$route', useFactory: $routeFactory, deps: ['$
 export function $routeParamsFactory(i: any) { return i.get('$routeParams'); }
 const $routeParamsProvider = { provide: '$routeParams', useFactory: $routeParamsFactory, deps: ['$injector'] };
 
-// $q
-export function $qFactory(i: any) { return i.get('$q'); }
-const $qProvider = { provide: '$q', useFactory: $qFactory, deps: ['$injector'] };
-
 export const upgradedAjsProviders = [
   // Upgraded AngularJS built-in services
   $logProvider,
   $locationProvider,
   $routeProvider,
-  $routeParamsProvider,
-  $qProvider
+  $routeParamsProvider
 ];
