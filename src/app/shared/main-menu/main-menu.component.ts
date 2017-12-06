@@ -1,8 +1,14 @@
 // main-menu.component.ts (to be identified as renamed...)
-const MenuCtrlDependencies = ['$log', '$location'];
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 
-export class MainMenuCtrl {
-  constructor(private $log, private $location) {
+@Component({
+  selector: 'main-menu',
+  encapsulation: ViewEncapsulation.None,
+  templateUrl: './main-menu.component.html'
+})
+
+export class MainMenuComponent {
+  constructor(@Inject('$log') private $log, @Inject('$location') private $location) {
     $log.debug('[MenuCtrl] - INIT.');
   }
 
@@ -14,11 +20,3 @@ export class MainMenuCtrl {
     return currentPath.substr(0, path.length) === path ? 'active' : '';
   }
 }
-
-MainMenuCtrl.$inject = MenuCtrlDependencies;
-
-export const MainMenuComponent = {
-  controller: MainMenuCtrl,
-  controllerAs: 'vm',
-  templateUrl: '../views/main-menu.component.html'
-};

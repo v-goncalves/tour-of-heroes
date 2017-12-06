@@ -3,14 +3,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { UpgradeModule } from '@angular/upgrade/static';
 
 import { ANGULAR_JS_MAIN_MODULE_NAME, AngularJsApp } from '../app-js/app';
+import { upgradedAjsProviders } from './upgraded-ajs-providers';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [],
   imports: [
     BrowserModule,
-    UpgradeModule
+    UpgradeModule,
+    SharedModule
   ],
-  providers: []
+  providers: [
+    upgradedAjsProviders
+  ]
 })
 export class AppModule {
   constructor(private upgrade: UpgradeModule) { }

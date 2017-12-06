@@ -1,10 +1,11 @@
 // tourOfHeroesApp - application main module.
+import { downgradeComponent } from '@angular/upgrade/static';
 
 import * as angularJsModel from '../../node_modules/@types/angular/index';
 declare var angular: angularJsModel.IAngularStatic;
 
 import { AppRootComponent } from './app-root.component';
-import { MainMenuComponent } from './main-menu/main-menu.component';
+import { MainMenuComponent } from '../app/shared/main-menu/main-menu.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroesComponent } from './heroes/heroes.component';
 import { ApiServiceFactory } from './core/virtual-api-service';
@@ -41,7 +42,8 @@ export class AngularJsApp {
       ])
       .config(configRouting)
       .component('appRoot', AppRootComponent)
-      .component('mainMenu', MainMenuComponent)
+      .directive('mainMenu',
+        downgradeComponent({component: MainMenuComponent}) as angularJsModel.IDirectiveFactory)
       .component('dashboard', DashboardComponent)
       .component('heroes', HeroesComponent)
       .factory('apiService', ApiServiceFactory)
