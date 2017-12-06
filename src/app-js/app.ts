@@ -9,7 +9,6 @@ import { MainMenuComponent } from '../app/shared/main-menu/main-menu.component';
 import { DashboardComponent } from '../app/dashboard/dashboard.component';
 import { HeroesComponent } from '../app/heroes/heroes.component';
 import { ApiServiceFactory } from './core/virtual-api-service';
-import { HeroServiceFactory } from './core/hero-service';
 
 function configRouting ($routeProvider, $locationProvider) {
   $locationProvider.hashPrefix('');
@@ -48,8 +47,7 @@ export class AngularJsApp {
         downgradeComponent({component: DashboardComponent}) as angularJsModel.IDirectiveFactory)
       .directive('heroes',
         downgradeComponent({component: HeroesComponent}) as angular.IDirectiveFactory)
-      .factory('apiService', ApiServiceFactory)
-      .factory('heroService', HeroServiceFactory);
+      .factory('apiService', ApiServiceFactory);
 
     // angular.bootstrap(document.documentElement, ['tourOfHeroesApp']);
   }

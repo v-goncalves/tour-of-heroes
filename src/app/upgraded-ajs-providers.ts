@@ -1,5 +1,5 @@
 // Making AngularJS Dependencies Injectable to Angular
-import { heroServiceProvider } from './core/hero.service';
+import { apiServiceProvider } from './core/virtual-api.service';
 
 // $log
 export function $logFactory(i: any) { return i.get('$log'); }
@@ -19,7 +19,7 @@ const $routeParamsProvider = { provide: '$routeParams', useFactory: $routeParams
 
 export const upgradedAjsProviders = [
   // Upgraded services (from AngularJS)
-  heroServiceProvider,
+  apiServiceProvider,
 
   // Upgraded AngularJS built-in services
   $logProvider,

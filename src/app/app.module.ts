@@ -7,6 +7,9 @@ import { ANGULAR_JS_MAIN_MODULE_NAME, AngularJsApp } from '../app-js/app';
 import { upgradedAjsProviders } from './upgraded-ajs-providers';
 import { SharedModule } from './shared/shared.module';
 
+// services
+import { HeroService } from './core/hero.service';
+
 // components
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroesComponent } from './heroes/heroes.component';
@@ -28,6 +31,7 @@ import { HeroesComponent } from './heroes/heroes.component';
     HeroesComponent
   ],
   providers: [
+    HeroService,
     upgradedAjsProviders
   ]
 })
