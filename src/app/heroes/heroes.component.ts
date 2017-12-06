@@ -1,14 +1,23 @@
-const HeroesCtrlDependencies = ['$log', '$routeParams', '$location', 'heroService'];
-class HeroesCtrl {
+import { Component, Inject } from '@angular/core';
+
+import { HeroService} from '../core/hero.service';
+
+@Component({
+  selector: 'heroes',
+  templateUrl: './heroes.component.html',
+  styleUrls: ['./heroes.component.css']
+})
+export class HeroesComponent {
   heroes;
   hero;
   private heroId;
   private listOfHeroes;
   private heroIDsWaitForDeletion;
 
-  constructor(private $log, private $routeParams, private $location, private heroService) {
+  constructor(@Inject('$log') private $log, @Inject('$location') private $location,
+              @Inject('$routeParams') private $routeParams,  private heroService: HeroService) {
     $log.debug('[HeroesComponent] - INIT.');
-    this.heroes = null;
+    this.heroes = [];
     this.hero = null;
 
     this.heroId = $routeParams && $routeParams.heroId ? Number($routeParams.heroId) : null;
@@ -79,11 +88,3 @@ class HeroesCtrl {
     window.history.back();
   }
 }
-
-HeroesCtrl.$inject = HeroesCtrlDependencies;
-
-export const HeroesComponent = {
-  controller: HeroesCtrl,
-  controllerAs: 'vm',
-  templateUrl: '../views/heroes.component.html'
-};

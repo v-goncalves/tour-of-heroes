@@ -7,7 +7,7 @@ declare var angular: angularJsModel.IAngularStatic;
 import { AppRootComponent } from './app-root.component';
 import { MainMenuComponent } from '../app/shared/main-menu/main-menu.component';
 import { DashboardComponent } from '../app/dashboard/dashboard.component';
-import { HeroesComponent } from './heroes/heroes.component';
+import { HeroesComponent } from '../app/heroes/heroes.component';
 import { ApiServiceFactory } from './core/virtual-api-service';
 import { HeroServiceFactory } from './core/hero-service';
 
@@ -46,7 +46,8 @@ export class AngularJsApp {
         downgradeComponent({component: MainMenuComponent}) as angularJsModel.IDirectiveFactory)
       .directive('dashboard',
         downgradeComponent({component: DashboardComponent}) as angularJsModel.IDirectiveFactory)
-      .component('heroes', HeroesComponent)
+      .directive('heroes',
+        downgradeComponent({component: HeroesComponent}) as angular.IDirectiveFactory)
       .factory('apiService', ApiServiceFactory)
       .factory('heroService', HeroServiceFactory);
 

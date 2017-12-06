@@ -9,10 +9,12 @@ import { SharedModule } from './shared/shared.module';
 
 // components
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HeroesComponent } from './heroes/heroes.component';
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    HeroesComponent
   ],
   imports: [
     FormsModule,
@@ -22,7 +24,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   ],
   // Components and/or directives downgraded to AngularJS
   entryComponents: [
-    DashboardComponent
+    DashboardComponent,
+    HeroesComponent
   ],
   providers: [
     upgradedAjsProviders

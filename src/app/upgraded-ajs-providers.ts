@@ -13,6 +13,10 @@ const $locationProvider = { provide: '$location', useFactory: $locationFactory, 
 export function $routeFactory(i: any) { return i.get('$route'); }
 const $routeProvider = { provide: '$route', useFactory: $routeFactory, deps: ['$injector'] };
 
+// $routeParams
+export function $routeParamsFactory(i: any) { return i.get('$routeParams'); }
+const $routeParamsProvider = { provide: '$routeParams', useFactory: $routeParamsFactory, deps: ['$injector'] };
+
 export const upgradedAjsProviders = [
   // Upgraded services (from AngularJS)
   heroServiceProvider,
@@ -20,5 +24,6 @@ export const upgradedAjsProviders = [
   // Upgraded AngularJS built-in services
   $logProvider,
   $locationProvider,
-  $routeProvider
+  $routeProvider,
+  $routeParamsProvider
 ];
