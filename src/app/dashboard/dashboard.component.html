@@ -1,0 +1,26 @@
+<div ng-if="!loading" class="dashboard">
+  <h1>Top Heroes</h1>
+  <div *ngFor="let hero of topHeroes" class="hero-container col-md-3 col-sm-6">
+    <div class="hero" (click)="goToHeroDetail(hero)">
+      <h3 [attr.title]="hero?.name">{{hero?.name}}</h3>
+    </div>
+  </div>
+  <div class="clear"></div>
+
+  <div class="search-box">
+    <h4>Hero Search</h4>
+    <input [(ngModel)]="search" type="text" class="form-control"/>
+    <div *ngIf="search" class="search-result">
+      <ng-container *ngFor="let hero of heroes">
+        <div *ngIf="containsSearchString(hero.name)"
+             class="search-result-item"
+             (click)="goToHeroDetail(hero)"
+             [attr.title]="hero.name">
+          {{hero.name}}
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<h4 *ngIf="loading">Loading...</h4>

@@ -1,12 +1,18 @@
-const DashboardCtrlDependencies = ['$log', '$location', 'heroService'];
+import { Component, Inject } from '@angular/core';
+import { HeroService } from '../core/hero.service';
 
-export class DashboardCtrl {
+@Component({
+  selector: 'dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
+})
+export class DashboardComponent {
   loading: boolean;
   heroes;
   topHeroes;
   search: string;
 
-  constructor(private $log, private $location, private heroService) {
+  constructor(@Inject('$log') private $log, @Inject('$location') private $location, private heroService: HeroService) {
     $log.debug('[DashboardCtrl] - INIT.');
     const topN = 4;
 
@@ -47,11 +53,3 @@ export class DashboardCtrl {
     }
   }
 }
-
-DashboardCtrl.$inject = DashboardCtrlDependencies;
-
-export const DashboardComponent = {
-  controller: DashboardCtrl,
-  controllerAs: 'vm',
-  templateUrl: '../views/dashboard.component.html'
-};
