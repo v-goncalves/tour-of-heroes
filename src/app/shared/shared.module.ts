@@ -10,8 +10,7 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
   declarations: [
     MainMenuComponent
   ],
-  // Components and/or directives downgraded to AngularJS
-  entryComponents: [
+  exports: [
     MainMenuComponent
   ]
 })

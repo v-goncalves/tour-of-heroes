@@ -1,4 +1,5 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { HeroService} from '../core/hero.service';
 import { LoggerService } from '../core/logger.service';
@@ -15,16 +16,17 @@ export class HeroesComponent {
   private listOfHeroes;
   private heroIDsWaitForDeletion;
 
-  constructor(private $log: LoggerService, @Inject('$location') private $location,
-              @Inject('$routeParams') private $routeParams,  private heroService: HeroService) {
+  constructor(private $log: LoggerService, private route: ActivatedRoute,
+              private heroService: HeroService) {
     $log.debug('[HeroesComponent] - INIT.');
     this.heroes = [];
     this.hero = null;
 
-    this.heroId = $routeParams && $routeParams.heroId ? Number($routeParams.heroId) : null;
+    route.params.subscribe((params) => {
+      this.heroId = params && params.heroId ? Number(params.heroId) : null;
+      this.getHeroesFromServer();
+    });
     this.heroIDsWaitForDeletion = [];
-
-    this.getHeroesFromServer();
   }
 
   private errorPopUp(e) {

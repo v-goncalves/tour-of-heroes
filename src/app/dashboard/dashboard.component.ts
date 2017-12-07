@@ -1,6 +1,7 @@
-import { Component, Inject } from '@angular/core';
-import { HeroService } from '../core/hero.service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
+import { HeroService } from '../core/hero.service';
 import { LoggerService } from '../core/logger.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class DashboardComponent {
   topHeroes;
   search: string;
 
-  constructor(private $log: LoggerService, @Inject('$location') private $location, private heroService: HeroService) {
+  constructor(private $log: LoggerService, private router: Router, private heroService: HeroService) {
     $log.debug('[DashboardCtrl] - INIT.');
     const topN = 4;
 
@@ -48,7 +49,7 @@ export class DashboardComponent {
     this.$log.debug('[DashboardCtrl  : goToHeroDetail] - Triggered.');
     if (hero && hero.id) {
       this.$log.debug('[DashboardCtrl  : goToHeroDetail] - Going to hero detais, id =' + hero.id + '.');
-      this.$location.path('/heroes/' + hero.id);
+      this.router.navigateByUrl('/heroes/' + hero.id);
     }
     else {
       this.$log.debug('[DashboardCtrl  : goToHeroDetail] - Error: \'hero.id\' do not exist.');

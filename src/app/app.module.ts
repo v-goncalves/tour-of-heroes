@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { FormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
 
-import { ANGULAR_JS_MAIN_MODULE_NAME, AngularJsApp } from '../app-js/app';
-import { upgradedAjsProviders } from './upgraded-ajs-providers';
 import { SharedModule } from './shared/shared.module';
 
 // services
@@ -13,36 +11,34 @@ import { ApiService } from './core/virtual-api.service';
 import { LoggerService } from './core/logger.service';
 
 // components
+import { AppRootComponent } from './app-root.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroesComponent } from './heroes/heroes.component';
 
+const appRoutes: Routes = [
+  { path: 'heroes', component: HeroesComponent },
+  { path: 'heroes/:heroId', component: HeroesComponent },
+  { path: '',      component: DashboardComponent },
+  { path: '**', component: DashboardComponent }
+];
+
 @NgModule({
   declarations: [
+    AppRootComponent,
     DashboardComponent,
     HeroesComponent
   ],
   imports: [
     FormsModule,
     BrowserModule,
-    UpgradeModule,
-    SharedModule
-  ],
-  // Components and/or directives downgraded to AngularJS
-  entryComponents: [
-    DashboardComponent,
-    HeroesComponent
+    SharedModule,
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [
     HeroService,
     ApiService,
-    LoggerService,
-    upgradedAjsProviders
-  ]
+    LoggerService
+  ],
+  bootstrap: [AppRootComponent]
 })
-export class AppModule {
-  constructor(private upgrade: UpgradeModule) { }
-  ngDoBootstrap() {
-    new AngularJsApp().bootstrap();
-    this.upgrade.bootstrap(document.body, [ANGULAR_JS_MAIN_MODULE_NAME], { strictDi: true });
-  }
-}
+export class AppModule { }
